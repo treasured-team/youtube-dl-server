@@ -1,0 +1,1 @@
+docker run -it -p 3000:3000 --env-file .env -v $(pwd)/certs:/usr/src/app/certs youtube-dl-server
