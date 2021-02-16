@@ -1,2 +1,3 @@
 dist/*
 Tools/bin/youtube-dl
+node_modules
