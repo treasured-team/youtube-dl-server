@@ -1,4 +1,4 @@
 {
   "name": "youtube-dl-server",
-  "description": "A youtube-dl web server, powered by youtube-dl"
+  "description": "A youtube-dl web server, powered by youtube-dl, with docker"
 }
