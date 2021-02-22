@@ -17,7 +17,6 @@ COPY . .
 #Setup secrets
 SECRET ENV NODE_ENV
 SECRET ENV PORT
-SECRET ENV HOST
 SECRET ENV OKD_DEV_REGISTRY_TOKEN
 SECRET ENV OKD_DEV_REGISTRY_URL
 SECRET ENV OKD_PRODUCTION_REGISTRY_TOKEN
@@ -28,7 +27,6 @@ RUN docker run -d -p 80:3000 \
     --env NODE_ENV \
     --env NEXT_PUBLIC_API_HOST \
     --env PORT \
-    --env HOST \
     --env USE_HTTP=1 \
     image
 RUN bash pushImage.sh
