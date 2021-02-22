@@ -9,7 +9,8 @@ export class YoutubeDl {
     public static async getVideoMetadata(url: string, options?: string) {
         options = options ||  '-f \"best\"';
         // const command = `${bin} ${options} --add-header Access-Control-Allow-Origin:* --dump-json ${url}`;
-        const command = `${bin} -f "best" --add-header Access-Control-Allow-Origin:* --dump-json ${url}`;
+        // const command = `${bin} -f "best" --add-header Access-Control-Allow-Origin:* --dump-json ${url}`;
+        const command = `${bin} ${options} --dump-json ${url}`;
         return await new Promise<any>((resolve, reject) => {
             exec(command, (error: ExecException | null, stdout: string, stderr: string) => {
                 if(error) {
