@@ -1,0 +1,35 @@
+#This is an example LayerCI configuration for Docker!
+FROM vm/ubuntu:18.04
+
+# To note: Layerfiles create entire VMs, *not* containers!
+
+# install the latest version of Docker, as in the official Docker installation tutorial.
+RUN apt-get update && \
+    apt-get install apt-transport-https ca-certificates curl software-properties-common && \
+    curl -fsSL https://download.docker.com/linux/ubuntu/gpg | apt-key add - && \
+    add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu bionic stable" && \
+    apt-get update && \
+    apt install docker-ce
+
+# copy files from the repository into this staging server
+COPY . .
+
+#Setup secrets
+SECRET ENV NODE_ENV
+SECRET ENV PORT
+SECRET ENV HOST
+SECRET ENV OKD_DEV_REGISTRY_TOKEN
+SECRET ENV OKD_DEV_REGISTRY_URL
+SECRET ENV OKD_PRODUCTION_REGISTRY_TOKEN
+SECRET ENV OKD_PRODUCTION_REGISTRY_URL
+
+RUN docker build -t image .
+RUN docker run -d -p 80:3000 \
+    --env NODE_ENV \
+    --env NEXT_PUBLIC_API_HOST \
+    --env PORT \
+    --env HOST \
+    --env USE_HTTP=1 \
+    image
+RUN bash pushImage.sh
+EXPOSE WEBSITE http://localhost:80

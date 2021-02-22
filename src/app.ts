@@ -20,6 +20,7 @@ app.get('/v1/video', async (req, res) => {
             return;
         }
         const metadata = await YoutubeDl.getVideoMetadata(url, options);
+        console.log("OPTIONS", options)
         res.json(metadata);
     } catch (e) {
         console.error(e)
